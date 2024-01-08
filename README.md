@@ -308,3 +308,26 @@ YOLOv7-3d-detection & YOLOv7-lidar & YOLOv7-road (with NTUT)
 * [https://github.com/TexasInstruments/edgeai-yolov5/tree/yolo-pose](https://github.com/TexasInstruments/edgeai-yolov5/tree/yolo-pose)
 
 </details>
+
+## Reference
+* [Install TnsorRT](https://blog.csdn.net/lkh798842577/article/details/120218588)
+
+## Log
+* 20240108
+```
+(yolov7-TensorRT) ytl0623@lab508:~/data/yolov7-TensorRT$ python ./tensorrt-python/export.py -o yolov7-tiny.onnx -e yolov7-tiny-nms.trt -p fp16
+Namespace(calib_batch_size=8, calib_cache='./calibration.cache', calib_input=None, calib_num_images=5000, conf_thres=0.4, end2end=False, engine='yolov7-tiny-nms.trt', iou_thres=0.5, max_det=100, onnx='yolov7-tiny.onnx', precision='fp16', v8=False, verbose=False, workspace=1)
+[01/08/2024-17:06:37] [TRT] [W] Unable to determine GPU memory usage
+[01/08/2024-17:06:37] [TRT] [W] Unable to determine GPU memory usage
+[01/08/2024-17:06:37] [TRT] [I] [MemUsageChange] Init CUDA: CPU +0, GPU +0, now: CPU 23, GPU 0 (MiB)
+[01/08/2024-17:06:37] [TRT] [W] CUDA initialization failure with error: 35. Please check your CUDA installation:  http://docs.nvidia.com/cuda/cuda-installation-guide-linux/index.html
+Traceback (most recent call last):
+  File "./tensorrt-python/export.py", line 308, in <module>
+    main(args)
+  File "./tensorrt-python/export.py", line 266, in main
+    builder = EngineBuilder(args.verbose, args.workspace)
+  File "./tensorrt-python/export.py", line 107, in __init__
+    self.builder = trt.Builder(self.trt_logger)
+TypeError: pybind11::init(): factory function returned nullptr
+(yolov7-TensorRT) ytl0623@lab508:~/data/yolov7-TensorRT$ 
+```

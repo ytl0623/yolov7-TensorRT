@@ -382,5 +382,18 @@ TypeError: pybind11::init(): factory function returned nullptr
 ```
 
 * 20240109
+```
+(tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>python detect_onnx.py
+Traceback (most recent call last):
+  File "C:\Users\User\Downloads\yolov7-TensorRT\detect_onnx.py", line 18, in <module>
+    session = ort.InferenceSession(w, providers=providers)
+  File "C:\Users\User\anaconda3\envs\tensorrt\lib\site-packages\onnxruntime\capi\onnxruntime_inference_collection.py", line 419, in __init__
+    self._create_inference_session(providers, provider_options, disabled_optimizers)
+  File "C:\Users\User\anaconda3\envs\tensorrt\lib\site-packages\onnxruntime\capi\onnxruntime_inference_collection.py", line 452, in _create_inference_session
+    sess = C.InferenceSession(session_options, self._model_path, True, self._read_config_from_model)
+onnxruntime.capi.onnxruntime_pybind11_state.Fail: [ONNXRuntimeError] : 1 : FAIL : Load model from ./yolov7.onnx failed:Fatal error: TRT:EfficientNMS_TRT(-1) is not a registered function/op
+
+(tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>
+```
 
 </details>

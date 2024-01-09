@@ -382,6 +382,7 @@ TypeError: pybind11::init(): factory function returned nullptr
 ```
 
 * 20240109
+yolov7 ONNX model inference error
 ```
 (tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>python detect_onnx.py
 Traceback (most recent call last):
@@ -392,6 +393,45 @@ Traceback (most recent call last):
   File "C:\Users\User\anaconda3\envs\tensorrt\lib\site-packages\onnxruntime\capi\onnxruntime_inference_collection.py", line 452, in _create_inference_session
     sess = C.InferenceSession(session_options, self._model_path, True, self._read_config_from_model)
 onnxruntime.capi.onnxruntime_pybind11_state.Fail: [ONNXRuntimeError] : 1 : FAIL : Load model from ./yolov7.onnx failed:Fatal error: TRT:EfficientNMS_TRT(-1) is not a registered function/op
+
+(tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>
+```
+
+yolov7-seg/-mask export ONNX model error
+```
+(tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>python export.py --weights ./yolov7-seg.pt --grid --end2end --simplify --topk-all 100 --iou-thres 0.65 --conf-thres 0.35 --img-size 640 640
+Namespace(weights='./yolov7-seg.pt', img_size=[640, 640], batch_size=1, dynamic=False, dynamic_batch=False, grid=True, end2end=True, max_wh=None, topk_all=100, iou_thres=0.65, conf_thres=0.35, device='cpu', simplify=True, include_nms=False, fp16=False, int8=False)
+YOLOR  d6dc109 torch 2.1.2+cu121 CPU
+
+Traceback (most recent call last):
+  File "C:\Users\User\Downloads\yolov7-TensorRT\export.py", line 47, in <module>
+    model = attempt_load(opt.weights, map_location=device)  # load FP32 model
+  File "C:\Users\User\Downloads\yolov7-TensorRT\models\experimental.py", line 252, in attempt_load
+    ckpt = torch.load(w, map_location=map_location)  # load
+  File "C:\Users\User\anaconda3\envs\tensorrt\lib\site-packages\torch\serialization.py", line 1014, in load
+    return _load(opened_zipfile,
+  File "C:\Users\User\anaconda3\envs\tensorrt\lib\site-packages\torch\serialization.py", line 1422, in _load
+    result = unpickler.load()
+  File "C:\Users\User\anaconda3\envs\tensorrt\lib\site-packages\torch\serialization.py", line 1415, in find_class
+    return super().find_class(mod_name, name)
+AttributeError: Can't get attribute 'SegmentationModel' on <module 'models.yolo' from 'C:\\Users\\User\\Downloads\\yolov7-TensorRT\\models\\yolo.py'>
+
+(tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>python export.py --weights ./yolov7-mask.pt --grid --end2end --simplify --topk-all 100 --iou-thres 0.65 --conf-thres 0.35 --img-size 640 640
+Namespace(weights='./yolov7-mask.pt', img_size=[640, 640], batch_size=1, dynamic=False, dynamic_batch=False, grid=True, end2end=True, max_wh=None, topk_all=100, iou_thres=0.65, conf_thres=0.35, device='cpu', simplify=True, include_nms=False, fp16=False, int8=False)
+YOLOR  d6dc109 torch 2.1.2+cu121 CPU
+
+Traceback (most recent call last):
+  File "C:\Users\User\Downloads\yolov7-TensorRT\export.py", line 47, in <module>
+    model = attempt_load(opt.weights, map_location=device)  # load FP32 model
+  File "C:\Users\User\Downloads\yolov7-TensorRT\models\experimental.py", line 252, in attempt_load
+    ckpt = torch.load(w, map_location=map_location)  # load
+  File "C:\Users\User\anaconda3\envs\tensorrt\lib\site-packages\torch\serialization.py", line 1014, in load
+    return _load(opened_zipfile,
+  File "C:\Users\User\anaconda3\envs\tensorrt\lib\site-packages\torch\serialization.py", line 1422, in _load
+    result = unpickler.load()
+  File "C:\Users\User\anaconda3\envs\tensorrt\lib\site-packages\torch\serialization.py", line 1415, in find_class
+    return super().find_class(mod_name, name)
+AttributeError: Can't get attribute 'Merge' on <module 'models.common' from 'C:\\Users\\User\\Downloads\\yolov7-TensorRT\\models\\common.py'>
 
 (tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>
 ```

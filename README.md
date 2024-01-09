@@ -140,6 +140,28 @@ On image:
 python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source inference/images/horses.jpg
 ```
 
+````shell
+(tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source inference/images/horses.jpg
+Namespace(weights=['yolov7.pt'], source='inference/images/horses.jpg', img_size=640, conf_thres=0.25, iou_thres=0.45, device='', view_img=False, save_txt=False, save_conf=False, nosave=False, classes=None, agnostic_nms=False, augment=False, update=False, project='runs/detect', name='exp', exist_ok=False, no_trace=False)
+YOLOR  d527376 torch 2.1.2+cu121 CUDA:0 (NVIDIA GeForce RTX 2060, 6143.6875MB)
+
+Fusing layers...
+RepConv.fuse_repvgg_block
+RepConv.fuse_repvgg_block
+RepConv.fuse_repvgg_block
+C:\Users\User\anaconda3\envs\tensorrt\lib\site-packages\torch\functional.py:504: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ..\aten\src\ATen\native\TensorShape.cpp:3527.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+Model Summary: 306 layers, 36905341 parameters, 6652669 gradients, 104.5 GFLOPS
+ Convert model to Traced-model...
+ traced_script_module saved!
+ model is traced!
+
+5 horses, Done. (13.0ms) Inference, (413.1ms) NMS
+ The image with the result is saved in: runs\detect\exp3\horses.jpg
+Done. (0.732s)
+
+(tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>
+```
 Cost 0.763 s
 
 Tested with: Windows 11(Anaconda), Python 3.10, Pytorch 2.1.2(Cuda 12.1), TensorRT 8.6.1
@@ -168,6 +190,28 @@ wget https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-tiny.pt
 python export.py --weights ./yolov7-tiny.pt --grid --end2end --simplify --topk-all 100 --iou-thres 0.65 --conf-thres 0.35 --img-size 640 640
 git clone https://github.com/Linaom1214/tensorrt-python.git
 python ./tensorrt-python/export.py -o yolov7-tiny.onnx -e yolov7-tiny-nms.trt -p fp16
+```
+
+````shell
+(tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>python detect_tensorrt.py
+[01/09/2024-16:01:30] [TRT] [I] Loaded engine size: 72 MiB
+[01/09/2024-16:01:31] [TRT] [I] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +4, GPU +10, now: CPU 7607, GPU 1117 (MiB)
+[01/09/2024-16:01:31] [TRT] [I] [MemUsageChange] Init cuDNN: CPU +5, GPU +8, now: CPU 7612, GPU 1125 (MiB)
+[01/09/2024-16:01:31] [TRT] [W] TensorRT was linked against cuDNN 8.9.0 but loaded cuDNN 8.8.1
+[01/09/2024-16:01:31] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in engine deserialization: CPU +0, GPU +73, now: CPU 0, GPU 73 (MiB)
+C:\Users\User\Downloads\yolov7-TensorRT\detect_tensorrt.py:23: DeprecationWarning: Use get_tensor_name instead.
+  name = model.get_binding_name(index)
+C:\Users\User\Downloads\yolov7-TensorRT\detect_tensorrt.py:24: DeprecationWarning: Use get_tensor_dtype instead.
+  dtype = trt.nptype(model.get_binding_dtype(index))
+C:\Users\User\Downloads\yolov7-TensorRT\detect_tensorrt.py:25: DeprecationWarning: Use get_tensor_shape instead.
+  shape = tuple(model.get_binding_shape(index))
+[01/09/2024-16:01:31] [TRT] [I] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +0, GPU +8, now: CPU 7552, GPU 1141 (MiB)
+[01/09/2024-16:01:31] [TRT] [I] [MemUsageChange] Init cuDNN: CPU +2, GPU +8, now: CPU 7554, GPU 1149 (MiB)
+[01/09/2024-16:01:31] [TRT] [W] TensorRT was linked against cuDNN 8.9.0 but loaded cuDNN 8.8.1
+[01/09/2024-16:01:31] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +73, now: CPU 0, GPU 146 (MiB)
+Cost 0.007016600000497419 s
+
+(tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>
 ```
 Cost 0.007 s
 

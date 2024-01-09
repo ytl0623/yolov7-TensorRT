@@ -141,6 +141,7 @@ python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source inferen
 ```
 
 ```
+# Tested with: Windows 11(Anaconda), Python 3.10, Pytorch 2.1.2(Cuda 12.1), TensorRT 8.6.1
 (tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source inference/images/horses.jpg
 Namespace(weights=['yolov7.pt'], source='inference/images/horses.jpg', img_size=640, conf_thres=0.25, iou_thres=0.45, device='', view_img=False, save_txt=False, save_conf=False, nosave=False, classes=None, agnostic_nms=False, augment=False, update=False, project='runs/detect', name='exp', exist_ok=False, no_trace=False)
 YOLOR  d527376 torch 2.1.2+cu121 CUDA:0 (NVIDIA GeForce RTX 2060, 6143.6875MB)
@@ -162,9 +163,6 @@ Done. (0.732s)
 
 (tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>
 ```
-Cost 0.763 s
-
-Tested with: Windows 11(Anaconda), Python 3.10, Pytorch 2.1.2(Cuda 12.1), TensorRT 8.6.1
 
 <div align="center">
     <a href="./">
@@ -193,6 +191,7 @@ python ./tensorrt-python/export.py -o yolov7-tiny.onnx -e yolov7-tiny-nms.trt -p
 ```
 
 ```
+# Tested with: Windows 11(Anaconda), Python 3.10, Pytorch 2.1.2(Cuda 12.1), TensorRT 8.6.1
 (tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>python detect_tensorrt.py
 [01/09/2024-16:01:30] [TRT] [I] Loaded engine size: 72 MiB
 [01/09/2024-16:01:31] [TRT] [I] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +4, GPU +10, now: CPU 7607, GPU 1117 (MiB)
@@ -213,9 +212,6 @@ Cost 0.007016600000497419 s
 
 (tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>
 ```
-Cost 0.007 s
-
-Tested with: Windows 11(Anaconda), Python 3.10, Pytorch 2.1.2(Cuda 12.1), TensorRT 8.6.1
 
 **Pytorch to TensorRT another way** <a href="https://colab.research.google.com/gist/AlexeyAB/fcb47ae544cf284eb24d8ad8e880d45c/yolov7trtlinaom.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <details><summary> <b>Expand</b> </summary>
 

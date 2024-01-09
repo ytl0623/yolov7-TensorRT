@@ -140,6 +140,9 @@ On image:
 python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source inference/images/horses.jpg
 ```
 
+Cost 0.007 s
+Tested with: Windows 11(Anaconda), Python 3.10, Pytorch 2.1.2(Cuda 12.1), TensorRT 8.6.1
+
 <div align="center">
     <a href="./">
         <img src="./figure/horses_prediction.jpg" width="59%"/>
@@ -165,6 +168,8 @@ python export.py --weights ./yolov7-tiny.pt --grid --end2end --simplify --topk-a
 git clone https://github.com/Linaom1214/tensorrt-python.git
 python ./tensorrt-python/export.py -o yolov7-tiny.onnx -e yolov7-tiny-nms.trt -p fp16
 ```
+Cost 0.007 s
+Tested with: Windows 11(Anaconda), Python 3.10, Pytorch 2.1.2(Cuda 12.1), TensorRT 8.6.1
 
 **Pytorch to TensorRT another way** <a href="https://colab.research.google.com/gist/AlexeyAB/fcb47ae544cf284eb24d8ad8e880d45c/yolov7trtlinaom.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <details><summary> <b>Expand</b> </summary>
 
@@ -333,14 +338,9 @@ Traceback (most recent call last):
 TypeError: pybind11::init(): factory function returned nullptr
 (yolov7-TensorRT) ytl0623@lab508:~/data/yolov7-TensorRT$ 
 ```
-* 20240109 Tested with: Windows 11(Anaconda), Python 3.10, Pytorch 2.1.2(Cuda 12.1), TensorRT 8.6.1
+
+* 20240109
 ```
-(base) C:\Users\User>conda activate tensorrt
-
-(tensorrt) C:\Users\User>cd Downloads
-
-(tensorrt) C:\Users\User\Downloads>cd yolov7-TensorRT
-
 (tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source inference/images/horses.jpg
 Namespace(weights=['yolov7.pt'], source='inference/images/horses.jpg', img_size=640, conf_thres=0.25, iou_thres=0.45, device='', view_img=False, save_txt=False, save_conf=False, nosave=False, classes=None, agnostic_nms=False, augment=False, update=False, project='runs/detect', name='exp', exist_ok=False, no_trace=False)
 YOLOR  a207844 torch 2.1.2+cu121 CUDA:0 (NVIDIA GeForce RTX 2060, 6143.6875MB)

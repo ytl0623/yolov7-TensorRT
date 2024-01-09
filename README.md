@@ -140,7 +140,7 @@ On image:
 python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source inference/images/horses.jpg
 ```
 
-````shell
+``` shell
 (tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>python detect.py --weights yolov7.pt --conf 0.25 --img-size 640 --source inference/images/horses.jpg
 Namespace(weights=['yolov7.pt'], source='inference/images/horses.jpg', img_size=640, conf_thres=0.25, iou_thres=0.45, device='', view_img=False, save_txt=False, save_conf=False, nosave=False, classes=None, agnostic_nms=False, augment=False, update=False, project='runs/detect', name='exp', exist_ok=False, no_trace=False)
 YOLOR  d527376 torch 2.1.2+cu121 CUDA:0 (NVIDIA GeForce RTX 2060, 6143.6875MB)
@@ -178,21 +178,21 @@ Tested with: Windows 11(Anaconda), Python 3.10, Pytorch 2.1.2(Cuda 12.1), Tensor
 **Pytorch to CoreML (and inference on MacOS/iOS)** <a href="https://colab.research.google.com/github/WongKinYiu/yolov7/blob/main/tools/YOLOv7CoreML.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
 
 **Pytorch to ONNX with NMS (and inference)** <a href="https://colab.research.google.com/github/WongKinYiu/yolov7/blob/main/tools/YOLOv7onnx.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
-```shell
+``` shell
 python export.py --weights yolov7-tiny.pt --grid --end2end --simplify \
         --topk-all 100 --iou-thres 0.65 --conf-thres 0.35 --img-size 640 640 --max-wh 640
 ```
 
 **Pytorch to TensorRT with NMS (and inference)** <a href="https://colab.research.google.com/github/WongKinYiu/yolov7/blob/main/tools/YOLOv7trt.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
 
-```shell
+``` shell
 wget https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-tiny.pt
 python export.py --weights ./yolov7-tiny.pt --grid --end2end --simplify --topk-all 100 --iou-thres 0.65 --conf-thres 0.35 --img-size 640 640
 git clone https://github.com/Linaom1214/tensorrt-python.git
 python ./tensorrt-python/export.py -o yolov7-tiny.onnx -e yolov7-tiny-nms.trt -p fp16
 ```
 
-````shell
+``` shell
 (tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>python detect_tensorrt.py
 [01/09/2024-16:01:30] [TRT] [I] Loaded engine size: 72 MiB
 [01/09/2024-16:01:31] [TRT] [I] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +4, GPU +10, now: CPU 7607, GPU 1117 (MiB)
@@ -220,7 +220,7 @@ Tested with: Windows 11(Anaconda), Python 3.10, Pytorch 2.1.2(Cuda 12.1), Tensor
 **Pytorch to TensorRT another way** <a href="https://colab.research.google.com/gist/AlexeyAB/fcb47ae544cf284eb24d8ad8e880d45c/yolov7trtlinaom.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> <details><summary> <b>Expand</b> </summary>
 
 
-```shell
+`` shell
 wget https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7-tiny.pt
 python export.py --weights yolov7-tiny.pt --grid --include-nms
 git clone https://github.com/Linaom1214/tensorrt-python.git

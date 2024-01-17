@@ -193,22 +193,22 @@ python ./tensorrt-python/export.py -o yolov7-tiny.onnx -e yolov7-tiny-nms.trt -p
 ```
 # Tested with: Windows 11(Anaconda), Python 3.10, Pytorch 2.1.2(Cuda 12.1), TensorRT 8.6.1
 (tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>python detect_tensorrt.py
-[01/09/2024-16:01:30] [TRT] [I] Loaded engine size: 72 MiB
-[01/09/2024-16:01:31] [TRT] [I] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +4, GPU +10, now: CPU 7607, GPU 1117 (MiB)
-[01/09/2024-16:01:31] [TRT] [I] [MemUsageChange] Init cuDNN: CPU +5, GPU +8, now: CPU 7612, GPU 1125 (MiB)
-[01/09/2024-16:01:31] [TRT] [W] TensorRT was linked against cuDNN 8.9.0 but loaded cuDNN 8.8.1
-[01/09/2024-16:01:31] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in engine deserialization: CPU +0, GPU +73, now: CPU 0, GPU 73 (MiB)
-C:\Users\User\Downloads\yolov7-TensorRT\detect_tensorrt.py:23: DeprecationWarning: Use get_tensor_name instead.
+[01/17/2024-14:27:52] [TRT] [I] Loaded engine size: 72 MiB
+[01/17/2024-14:27:52] [TRT] [I] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +11, GPU +10, now: CPU 13092, GPU 1117 (MiB)
+[01/17/2024-14:27:52] [TRT] [I] [MemUsageChange] Init cuDNN: CPU +4, GPU +8, now: CPU 13096, GPU 1125 (MiB)
+[01/17/2024-14:27:52] [TRT] [W] TensorRT was linked against cuDNN 8.9.0 but loaded cuDNN 8.8.1
+[01/17/2024-14:27:52] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in engine deserialization: CPU +0, GPU +73, now: CPU 0, GPU 73 (MiB)
+C:\Users\User\Downloads\yolov7-TensorRT\detect_tensorrt.py:25: DeprecationWarning: Use get_tensor_name instead.
   name = model.get_binding_name(index)
-C:\Users\User\Downloads\yolov7-TensorRT\detect_tensorrt.py:24: DeprecationWarning: Use get_tensor_dtype instead.
+C:\Users\User\Downloads\yolov7-TensorRT\detect_tensorrt.py:26: DeprecationWarning: Use get_tensor_dtype instead.
   dtype = trt.nptype(model.get_binding_dtype(index))
-C:\Users\User\Downloads\yolov7-TensorRT\detect_tensorrt.py:25: DeprecationWarning: Use get_tensor_shape instead.
+C:\Users\User\Downloads\yolov7-TensorRT\detect_tensorrt.py:27: DeprecationWarning: Use get_tensor_shape instead.
   shape = tuple(model.get_binding_shape(index))
-[01/09/2024-16:01:31] [TRT] [I] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +0, GPU +8, now: CPU 7552, GPU 1141 (MiB)
-[01/09/2024-16:01:31] [TRT] [I] [MemUsageChange] Init cuDNN: CPU +2, GPU +8, now: CPU 7554, GPU 1149 (MiB)
-[01/09/2024-16:01:31] [TRT] [W] TensorRT was linked against cuDNN 8.9.0 but loaded cuDNN 8.8.1
-[01/09/2024-16:01:31] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +73, now: CPU 0, GPU 146 (MiB)
-Cost 0.007016600000497419 s
+[01/17/2024-14:27:52] [TRT] [I] [MemUsageChange] Init cuBLAS/cuBLASLt: CPU +0, GPU +8, now: CPU 13033, GPU 1141 (MiB)
+[01/17/2024-14:27:52] [TRT] [I] [MemUsageChange] Init cuDNN: CPU +2, GPU +8, now: CPU 13035, GPU 1149 (MiB)
+[01/17/2024-14:27:52] [TRT] [W] TensorRT was linked against cuDNN 8.9.0 but loaded cuDNN 8.8.1
+[01/17/2024-14:27:52] [TRT] [I] [MemUsageChange] TensorRT-managed allocation in IExecutionContext creation: CPU +0, GPU +73, now: CPU 0, GPU 146 (MiB)
+Cost 0.3626005999976769 s
 
 (tensorrt) C:\Users\User\Downloads\yolov7-TensorRT>
 ```

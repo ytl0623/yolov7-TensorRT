@@ -16,8 +16,10 @@ img = cv2.imread('./inference/images/horses.jpg')
 Binding = namedtuple('Binding', ('name', 'dtype', 'shape', 'data', 'ptr'))
 logger = trt.Logger(trt.Logger.INFO)
 trt.init_libnvinfer_plugins(logger, namespace="")
+
 with open(w, 'rb') as f, trt.Runtime(logger) as runtime:
     model = runtime.deserialize_cuda_engine(f.read())
+    
 bindings = OrderedDict()
 for index in range(model.num_bindings):
     name = model.get_binding_name(index)
@@ -25,6 +27,7 @@ for index in range(model.num_bindings):
     shape = tuple(model.get_binding_shape(index))
     data = torch.from_numpy(np.empty(shape, dtype=np.dtype(dtype))).to(device)
     bindings[name] = Binding(name, dtype, shape, data, int(data.data_ptr()))
+    
 binding_addrs = OrderedDict((n, d.ptr) for n, d in bindings.items())
 context = model.create_execution_context()
 
@@ -52,6 +55,7 @@ def letterbox(im, new_shape=(640, 640), color=(114, 114, 114), auto=True, scaleu
 
     if shape[::-1] != new_unpad:  # resize
         im = cv2.resize(im, new_unpad, interpolation=cv2.INTER_LINEAR)
+        
     top, bottom = int(round(dh - 0.1)), int(round(dh + 0.1))
     left, right = int(round(dw - 0.1)), int(round(dw + 0.1))
     im = cv2.copyMakeBorder(im, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)  # add border
@@ -72,7 +76,10 @@ names = ['person', 'bicycle', 'car', 'motorcycle', 'airplane', 'bus', 'train', '
          'potted plant', 'bed', 'dining table', 'toilet', 'tv', 'laptop', 'mouse', 'remote', 'keyboard', 'cell phone', 
          'microwave', 'oven', 'toaster', 'sink', 'refrigerator', 'book', 'clock', 'vase', 'scissors', 'teddy bear', 
          'hair drier', 'toothbrush']
+         
 colors = {name:[random.randint(0, 255) for _ in range(3)] for i,name in enumerate(names)}
+
+start = time.perf_counter()
 
 img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 image = img.copy()
@@ -94,10 +101,8 @@ for _ in range(10):
     binding_addrs['images'] = int(tmp.data_ptr())
     context.execute_v2(list(binding_addrs.values()))
 
-start = time.perf_counter()
 binding_addrs['images'] = int(im.data_ptr())
 context.execute_v2(list(binding_addrs.values()))
-print(f'Cost {time.perf_counter()-start} s')
 
 nums = bindings['num_dets'].data
 boxes = bindings['det_boxes'].data
@@ -116,6 +121,8 @@ for box,score,cl in zip(boxes,scores,classes):
     name += ' ' + str(round(float(score),3))
     cv2.rectangle(img,box[:2].tolist(),box[2:].tolist(),color,2)
     cv2.putText(img,name,(int(box[0]), int(box[1]) - 2),cv2.FONT_HERSHEY_SIMPLEX,0.75,color,thickness=2)
+
+print(f'Cost {time.perf_counter()-start} s')
 
 result = Image.fromarray(img)
 result.save( 'tensorrt_output.png' )
